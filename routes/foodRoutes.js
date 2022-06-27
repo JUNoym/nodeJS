@@ -25,5 +25,15 @@ app.post("/food", async (req, res) => {
     }
 })
 
+// データの部分修正を行うAPI
+app.patch("/food/:id", async (req, res) => {
+    try {
+        await foodModel.findByIdAndUpdate(req.params.id, req.body)
+        await foodModel.save()
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 
 module.exports = app
